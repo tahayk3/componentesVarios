@@ -1,17 +1,25 @@
 import React, { useState } from "react";
+import { useForm } from "../hooks/useForm";
 
 export const FormularioComponent = () =>{
     
-    const [formState, setformState] = useState({
-        userName:"Cristian Tahay",
-        email: "tahayk3@gmail.com",
-        password: "contrasenia2024xd"
-    });
+    const initialForm = {
+        userName:"",
+        email: "",
+        password: ""
+    };
 
-    const {userName,email, password } = formState;
+    const {formState,onInputChange} = useForm(initialForm);
+
+    const {userName, email, password } = formState;
+
+    const onSubmit = (event) =>{
+        event.preventDefault();
+        console.log(formState);
+    }
 
     return(
-        <form>
+        <form onSubmit={onSubmit}>
             <div className="form-group">
                 <label htmlFor="userName">User name</label>
                 <input 
@@ -19,6 +27,7 @@ export const FormularioComponent = () =>{
                     className="form-control" 
                     name="userName" 
                     value={userName}
+                    onChange={onInputChange}
                     placeholder="Enter user name"/>
             </div>
             <div className="form-group">
@@ -28,6 +37,7 @@ export const FormularioComponent = () =>{
                     className="form-control" 
                     name="email"
                     value= {email}
+                    onChange={onInputChange}
                     placeholder="Enter email"/>
             </div>
             <div className="form-group">
@@ -37,6 +47,7 @@ export const FormularioComponent = () =>{
                     className="form-control" 
                     name="password"
                     value= {password}
+                    onChange={onInputChange}
                     placeholder="Password"/>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
