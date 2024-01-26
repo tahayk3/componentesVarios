@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "../hooks/useForm";
 import  Modal  from "./Modal"; 
 
 export const FormularioComponent = () =>{
     const [mostrarMensaje, setMostrarMensaje] = useState(false);
+
+    const focusInput = useRef();
 
     const initialForm = {
         userName:"",
@@ -21,8 +23,6 @@ export const FormularioComponent = () =>{
         setMostrarMensaje(true);
     }
 
-
-
     //Este useEfect cambia una variable de estado, luego de 3 segundos
     useEffect(()=>{
         if(mostrarMensaje){
@@ -36,6 +36,10 @@ export const FormularioComponent = () =>{
  
         }
      },[mostrarMensaje]);
+     
+     useEffect(()=>{
+        focusInput.current.focus();
+     },[]);
 
 
     return(
@@ -47,6 +51,7 @@ export const FormularioComponent = () =>{
                 <div className="form-group">
                     <label htmlFor="userName">User name</label>
                     <input 
+                        ref={focusInput}
                         type="text" 
                         className="form-control" 
                         name="userName" 
