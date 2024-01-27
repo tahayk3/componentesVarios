@@ -41,7 +41,6 @@ export const FormularioComponent = () =>{
         focusInput.current.focus();
      },[]);
 
-
     return(
         <>
             <form onSubmit={onSubmit} >
